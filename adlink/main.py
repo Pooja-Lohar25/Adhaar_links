@@ -53,6 +53,13 @@ def agresp(data : response_form = Depends()):
     # else:
     #     return "your request was declined by the agency"
 
+@app.get('/display_users')
+def disuser():
+    return enter_user()
+
+@app.get('/insert_linked_agencies')
+def insert():
+    return enter_linked_agency()
 
 # @app.get("/data")
 # def get_u(current_user: User_data = Depends(get_current_active_user)):

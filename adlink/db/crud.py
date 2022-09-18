@@ -71,3 +71,28 @@ def ag_res(data:response_form):
         else:
             return ls
         
+def dis_user():
+    with get_db() as db:
+        data = db.exec(
+            "SELECT * FROM demo_user;"
+        ).fetchall()
+        return data
+
+
+def enter_user():
+    with get_db() as db:
+        data = demo_user(adhaar = "87465984794",name = "akshay",address = "s 23 aryan parisar sundar nagar halalpura lalghati bhopal",phone = "9838490375")
+        db.add(data)
+        db.commit()
+        return db.exec("SELECT * FROM demo_user").fetchall()
+
+def enter_linked_agency():
+    listofag=[{'adhaar':'87465984794',"agname":'pnb','ag_id':"pub12334","custid":'user1234'},
+    {'adhaar':'87465984794',"agname":'sbi','ag_id':"sbi341","custid":'sbuser234'},
+    {'adhaar':'87465984794',"agname":'rbi','ag_id':"rbi756","custid":'rbuser53436'}]
+    with get_db() as db:
+        for ag in listofag:
+            ag1 = demo_linked_agencies(adhaar = ag['adhaar'],agency_id = ag['ag_id'],ag_name = ag['agname'],custid = ag['custid'])
+            db.add(ag1)
+        db.commit()
+        return db.exec("SELECT * FROM demo_linked_agencies").fetchall()

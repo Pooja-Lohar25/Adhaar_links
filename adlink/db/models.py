@@ -21,6 +21,18 @@ class user_req_agency(SQLModel,table=True): #user requesting any agency
     agencyid:str = Field(foreign_key = "agency_data.agency_id")
     adhaar:str 
     custid:str
-    fetched_data:str = Field(default = "new address")
+    fetched_data:str 
     status:str = Field(default = "0")
 
+class demo_user(SQLModel,table = True):
+    adhaar : str = Field(primary_key = True)
+    name:str
+    address:str
+    phone:str
+    
+class demo_linked_agencies(SQLModel,table = True):
+    id:Optional[int]=Field(primary_key=True)
+    adhaar :str = Field(foreign_key = demo_user.adhaar)
+    agency_id:str 
+    ag_name : str
+    custid : str
